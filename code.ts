@@ -80,7 +80,7 @@ figma.ui.onmessage = msg => {
       insertHashtag.x = textX
       insertHashtag.y = textY + 10
 
-      figma.currentPage.appendChild(insertHashtag)
+      textParent.appendChild(insertHashtag)
       //figma.viewport.scrollAndZoomIntoView(insertHashtag)
     })
   } else {
