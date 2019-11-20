@@ -17,12 +17,29 @@
 
       <button class="btn" id="createMexicanWave">Create</button>
     </div>
+
+    <div class="item">
+      <div class="item-text">
+        <h3>Create Hashtag</h3>
+        <p>Create an hashtag</p>
+      </div>
+
+      <button class="btn" id="createHashtag">Create</button>
+    </div>
   </div>
+
+  <p class="footer">
+    Code by <a href="https://armand-salle.fr" target="_blank">Armand Sallé</a> - Git Repo <a href="https://github.com/armandsalle/Utils-Figma-Plugin" target="_blank">here</a>
+  </p>
 </main>
 
 <script>
   document.getElementById("createMexicanWave").onclick = () => {
     parent.postMessage({ pluginMessage: { type: "create-mexican-waves" } }, "*")
+  }
+
+  document.getElementById("createHashtag").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "create-hashtag" } }, "*")
   }
 </script>
 
@@ -43,6 +60,7 @@
     font-family: "Kanit", sans-serif;
     background-color: var(--color-black);
     color: var(--color-white);
+    height: 380px;
   }
 
   h1 {
@@ -70,8 +88,14 @@
     line-height: 13px;
   }
 
+  a {
+    color: var(--color-white);
+  }
+
   .container {
     padding: 10px 20px;
+    position: relative;
+    height: 100%;
   }
 
   .wrapper {
@@ -98,6 +122,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
   }
 
   .item-text {
@@ -115,5 +140,15 @@
     font-size: 12px;
     text-transform: uppercase;
     cursor: pointer;
+  }
+
+  .footer {
+    color: var(--color-white);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    opacity: 0.5;
+    padding-bottom: 6px;
   }
 </style>
