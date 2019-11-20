@@ -19,19 +19,17 @@ const generateHashtag = str => str.length > 140 || str === ""
     ? ""
     : "#" +
         str
+            .toLowerCase()
             .split(" ")
             .map(capitalize)
             .join("");
 //Capitalize each word
 const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
-// Main function
-figma.ui.onmessage = msg => {
-    // Get the text selected
+const utilsText = msg => {
     const text = figma.currentPage.selection["0"].characters;
     const textX = figma.currentPage.selection["0"].x;
     const textY = figma.currentPage.selection["0"].y + figma.currentPage.selection["0"].height;
     const textParent = figma.currentPage.selection["0"].parent;
-    // If create-mexican-waves button is clicked
     if (msg.type === "create-mexican-waves") {
         figma.loadFontAsync({ family: "Roboto", style: "Regular" }).then(() => {
             // Init an Array of nodes texts
@@ -73,4 +71,16 @@ figma.ui.onmessage = msg => {
     else {
         figma.closePlugin();
     }
+};
+// When a user click a button on the UI
+figma.ui.onmessage = msg => {
+    // Get the text selected
+    figma.currentPage.selection.forEach(e => {
+        if (e.type === "TEXT") {
+            utilsText(msg);
+        }
+        else {
+            figma.ui.postMessage("NOT_TEXT");
+        }
+    });
 };
