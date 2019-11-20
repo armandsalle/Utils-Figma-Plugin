@@ -4,9 +4,13 @@ figma.ui.onmessage = msg => {
     if (msg.type === "create-mexican-waves") {
         // Load font async
         figma.loadFontAsync({ family: "Roboto", style: "Regular" }).then(() => {
+            // Init an Array of nodes texts
             const nodes = [];
             // Get the text selected
             const text = figma.currentPage.selection["0"].characters;
+            const textX = figma.currentPage.selection["0"].x;
+            const textY = figma.currentPage.selection["0"].y + figma.currentPage.selection["0"].height;
+            const textParent = figma.currentPage.selection["0"].parent;
             // Create the Mexican Wave
             const mw = [
                 ...text
@@ -24,15 +28,21 @@ figma.ui.onmessage = msg => {
                 const a = figma.createText();
                 a.characters = element;
                 a.y = i * 25;
-                // Add each MW to the page
-                figma.currentPage.appendChild(a);
+                // Create array of texts
                 nodes.push(a);
             });
+            // Create a group
+            const groupMW = figma.group(nodes, textParent);
+            groupMW.name = "Mexican Wave";
+            groupMW.x = textX;
+            groupMW.y = textY + 10;
             // Select and zoom to the result
-            figma.currentPage.selection = nodes;
+            figma.currentPage.selection = figma.currentPage.findAll(function (e) {
+                return e.name === "Mexican Wave";
+            });
             figma.viewport.scrollAndZoomIntoView(nodes);
         });
-        figma.closePlugin();
+        //figma.closePlugin()
     }
     else {
         figma.closePlugin();

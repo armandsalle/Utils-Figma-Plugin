@@ -5,6 +5,7 @@ declare const figma: PluginAPI
 declare const __html__: string
 
 interface PluginAPI {
+  figma: any
   readonly apiVersion: "1.0.0"
   readonly command: string
   readonly viewport: ViewportAPI
@@ -84,26 +85,26 @@ interface ClientStorageAPI {
 }
 
 interface NotificationOptions {
-  timeout?: number,
+  timeout?: number
 }
 
 interface NotificationHandler {
-  cancel: () => void,
+  cancel: () => void
 }
 
 interface ShowUIOptions {
-  visible?: boolean,
-  width?: number,
-  height?: number,
-  position?: 'default' | 'last' | 'auto' // PROPOSED API ONLY
+  visible?: boolean
+  width?: number
+  height?: number
+  position?: "default" | "last" | "auto" // PROPOSED API ONLY
 }
 
 interface UIPostMessageOptions {
-  origin?: string,
+  origin?: string
 }
 
 interface OnMessageProperties {
-  origin: string,
+  origin: string
 }
 
 type MessageEventHandler = (pluginMessage: any, props: OnMessageProperties) => void
@@ -122,7 +123,7 @@ interface UIAPI {
 }
 
 interface ViewportAPI {
-  center: { x: number, y: number }
+  center: { x: number; y: number }
   zoom: number
   scrollAndZoomIntoView(nodes: ReadonlyArray<BaseNode>)
 }
@@ -130,10 +131,7 @@ interface ViewportAPI {
 ////////////////////////////////////////////////////////////////////////////////
 // Datatypes
 
-type Transform = [
-  [number, number, number],
-  [number, number, number]
-]
+type Transform = [[number, number, number], [number, number, number]]
 
 interface Vector {
   readonly x: number
@@ -251,9 +249,9 @@ interface RowsColsLayoutGrid {
   readonly alignment: "MIN" | "MAX" | "STRETCH" | "CENTER"
   readonly gutterSize: number
 
-  readonly count: number        // Infinity when "Auto" is set in the UI
+  readonly count: number // Infinity when "Auto" is set in the UI
   readonly sectionSize?: number // Not set for alignment: "STRETCH"
-  readonly offset?: number      // Not set for alignment: "CENTER"
+  readonly offset?: number // Not set for alignment: "CENTER"
 
   readonly visible?: boolean
   readonly color?: RGBA
@@ -276,23 +274,23 @@ interface ExportSettingsConstraints {
 
 interface ExportSettingsImage {
   format: "JPG" | "PNG"
-  contentsOnly?: boolean    // defaults to true
+  contentsOnly?: boolean // defaults to true
   suffix?: string
   constraint?: ExportSettingsConstraints
 }
 
 interface ExportSettingsSVG {
   format: "SVG"
-  contentsOnly?: boolean    // defaults to true
+  contentsOnly?: boolean // defaults to true
   suffix?: string
-  svgOutlineText?: boolean  // defaults to true
-  svgIdAttribute?: boolean  // defaults to false
+  svgOutlineText?: boolean // defaults to true
+  svgIdAttribute?: boolean // defaults to false
   svgSimplifyStroke?: boolean // defaults to true
 }
 
 interface ExportSettingsPDF {
   format: "PDF"
-  contentsOnly?: boolean    // defaults to true
+  contentsOnly?: boolean // defaults to true
   suffix?: string
 }
 
@@ -312,8 +310,8 @@ interface VectorVertex {
 interface VectorSegment {
   readonly start: number
   readonly end: number
-  readonly tangentStart?: Vector  // Defaults to { x: 0, y: 0 }
-  readonly tangentEnd?: Vector  // Defaults to { x: 0, y: 0 }
+  readonly tangentStart?: Vector // Defaults to { x: 0, y: 0 }
+  readonly tangentEnd?: Vector // Defaults to { x: 0, y: 0 }
 }
 
 interface VectorRegion {
@@ -339,33 +337,35 @@ interface LetterSpacing {
   readonly unit: "PIXELS" | "PERCENT"
 }
 
-type LineHeight = {
-  readonly value: number
-  readonly unit: "PIXELS" | "PERCENT"
-} | {
-  readonly unit: "AUTO"
-}
+type LineHeight =
+  | {
+      readonly value: number
+      readonly unit: "PIXELS" | "PERCENT"
+    }
+  | {
+      readonly unit: "AUTO"
+    }
 
 type BlendMode =
-  "PASS_THROUGH" |
-  "NORMAL" |
-  "DARKEN" |
-  "MULTIPLY" |
-  "LINEAR_BURN" |
-  "COLOR_BURN" |
-  "LIGHTEN" |
-  "SCREEN" |
-  "LINEAR_DODGE" |
-  "COLOR_DODGE" |
-  "OVERLAY" |
-  "SOFT_LIGHT" |
-  "HARD_LIGHT" |
-  "DIFFERENCE" |
-  "EXCLUSION" |
-  "HUE" |
-  "SATURATION" |
-  "COLOR" |
-  "LUMINOSITY"
+  | "PASS_THROUGH"
+  | "NORMAL"
+  | "DARKEN"
+  | "MULTIPLY"
+  | "LINEAR_BURN"
+  | "COLOR_BURN"
+  | "LIGHTEN"
+  | "SCREEN"
+  | "LINEAR_DODGE"
+  | "COLOR_DODGE"
+  | "OVERLAY"
+  | "SOFT_LIGHT"
+  | "HARD_LIGHT"
+  | "DIFFERENCE"
+  | "EXCLUSION"
+  | "HUE"
+  | "SATURATION"
+  | "COLOR"
+  | "LUMINOSITY"
 
 interface Font {
   fontName: FontName
@@ -467,16 +467,9 @@ interface ExportMixin {
   exportAsync(settings?: ExportSettings): Promise<Uint8Array> // Defaults to PNG format
 }
 
-interface DefaultShapeMixin extends
-  BaseNodeMixin, SceneNodeMixin,
-  BlendMixin, GeometryMixin, LayoutMixin, ExportMixin {
-}
+interface DefaultShapeMixin extends BaseNodeMixin, SceneNodeMixin, BlendMixin, GeometryMixin, LayoutMixin, ExportMixin {}
 
-interface DefaultContainerMixin extends
-  BaseNodeMixin, SceneNodeMixin,
-  ChildrenMixin, FrameMixin,
-  BlendMixin, ConstraintMixin, LayoutMixin, ExportMixin {
-}
+interface DefaultContainerMixin extends BaseNodeMixin, SceneNodeMixin, ChildrenMixin, FrameMixin, BlendMixin, ConstraintMixin, LayoutMixin, ExportMixin {}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Nodes
@@ -489,8 +482,8 @@ interface DocumentNode extends BaseNodeMixin {
   appendChild(child: PageNode): void
   insertChild(index: number, child: PageNode): void
 
-  findAll(callback?: (node: (PageNode | SceneNode)) => boolean): Array<PageNode | SceneNode>
-  findOne(callback: (node: (PageNode | SceneNode)) => boolean): PageNode | SceneNode | null
+  findAll(callback?: (node: PageNode | SceneNode) => boolean): Array<PageNode | SceneNode>
+  findOne(callback: (node: PageNode | SceneNode) => boolean): PageNode | SceneNode | null
 }
 
 interface PageNode extends BaseNodeMixin, ChildrenMixin, ExportMixin {
@@ -604,7 +597,7 @@ interface ComponentNode extends DefaultContainerMixin {
   readonly key: string // The key to use with "importComponentByKeyAsync"
 }
 
-interface InstanceNode extends DefaultContainerMixin  {
+interface InstanceNode extends DefaultContainerMixin {
   readonly type: "INSTANCE"
   clone(): InstanceNode
   masterComponent: ComponentNode
@@ -616,41 +609,38 @@ interface BooleanOperationNode extends DefaultShapeMixin, ChildrenMixin, CornerM
   booleanOperation: "UNION" | "INTERSECT" | "SUBTRACT" | "EXCLUDE"
 }
 
-type BaseNode =
-  DocumentNode |
-  PageNode |
-  SceneNode
+type BaseNode = DocumentNode | PageNode | SceneNode
 
 type SceneNode =
-  SliceNode |
-  FrameNode |
-  ComponentNode |
-  InstanceNode |
-  BooleanOperationNode |
-  VectorNode |
-  StarNode |
-  LineNode |
-  EllipseNode |
-  PolygonNode |
-  RectangleNode |
-  TextNode
+  | SliceNode
+  | FrameNode
+  | ComponentNode
+  | InstanceNode
+  | BooleanOperationNode
+  | VectorNode
+  | StarNode
+  | LineNode
+  | EllipseNode
+  | PolygonNode
+  | RectangleNode
+  | TextNode
 
 type NodeType =
-  "DOCUMENT" |
-  "PAGE" |
-  "SLICE" |
-  "FRAME" |
-  "GROUP" |
-  "COMPONENT" |
-  "INSTANCE" |
-  "BOOLEAN_OPERATION" |
-  "VECTOR" |
-  "STAR" |
-  "LINE" |
-  "ELLIPSE" |
-  "POLYGON" |
-  "RECTANGLE" |
-  "TEXT"
+  | "DOCUMENT"
+  | "PAGE"
+  | "SLICE"
+  | "FRAME"
+  | "GROUP"
+  | "COMPONENT"
+  | "INSTANCE"
+  | "BOOLEAN_OPERATION"
+  | "VECTOR"
+  | "STAR"
+  | "LINE"
+  | "ELLIPSE"
+  | "POLYGON"
+  | "RECTANGLE"
+  | "TEXT"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Styles
