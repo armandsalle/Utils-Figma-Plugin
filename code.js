@@ -65,8 +65,9 @@ figma.ui.onmessage = msg => {
             insertHashtag.characters = hashtag;
             insertHashtag.x = textX;
             insertHashtag.y = textY + 10;
+            const nodes = [insertHashtag];
             textParent.appendChild(insertHashtag);
-            //figma.viewport.scrollAndZoomIntoView(insertHashtag)
+            figma.viewport.scrollAndZoomIntoView(nodes);
         });
     }
     else {
