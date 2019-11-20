@@ -1,11 +1,119 @@
-<button id="create">Create</button>
-<button id="cancel">Cancel</button>
+<link href="https://fonts.googleapis.com/css?family=Kanit:400,500,700,800,900&display=swap" rel="stylesheet" />
+
+<main class="container">
+  <h1>Utils functions</h1>
+
+  <div class="wrapper">
+    <div class="title_wrap">
+      <h2 class="title">Text</h2>
+      <div class="line"></div>
+    </div>
+
+    <div class="item">
+      <div class="item-text">
+        <h3>Mexican Wave</h3>
+        <p>Create a group of text with each letter uppercase</p>
+      </div>
+
+      <button class="btn" id="createMexicanWave">Create</button>
+    </div>
+  </div>
+</main>
+
 <script>
-  document.getElementById("create").onclick = () => {
+  document.getElementById("createMexicanWave").onclick = () => {
     parent.postMessage({ pluginMessage: { type: "create-mexican-waves" } }, "*")
   }
-
-  document.getElementById("cancel").onclick = () => {
-    parent.postMessage({ pluginMessage: { type: "cancel" } }, "*")
-  }
 </script>
+
+<style>
+  :root {
+    --color-black: #1c1c1c;
+    --color-white: #eeebec;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+  }
+
+  body {
+    font-family: "Kanit", sans-serif;
+    background-color: var(--color-black);
+    color: var(--color-white);
+  }
+
+  h1 {
+    font-size: 36px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  h2 {
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.8;
+    text-transform: uppercase;
+    margin-right: 20px;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  p {
+    font-size: 12px;
+    opacity: 0.3;
+    line-height: 13px;
+  }
+
+  .container {
+    padding: 10px 20px;
+  }
+
+  .wrapper {
+    margin-top: 50px;
+    width: 100%;
+  }
+
+  .title_wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: 11px;
+  }
+
+  .line {
+    height: 1px;
+    background-color: var(--color-white);
+    opacity: 0.5;
+    flex-grow: 1;
+    margin-bottom: 6px;
+  }
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .item-text {
+    max-width: 170px;
+  }
+
+  .btn {
+    padding: 6px 33px;
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    font-weight: 900;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+</style>

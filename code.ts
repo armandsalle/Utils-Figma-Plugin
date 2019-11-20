@@ -1,4 +1,6 @@
 figma.showUI(__html__)
+figma.ui.show()
+figma.ui.resize(500, 400)
 
 figma.ui.onmessage = msg => {
   // Then create button is clicked
