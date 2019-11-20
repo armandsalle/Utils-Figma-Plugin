@@ -35,53 +35,74 @@ const generateHashtag = str =>
 const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
 
 const utilsText = msg => {
+  console.log(figma.currentPage.selection["0"])
   const text = figma.currentPage.selection["0"].characters
   const textX = figma.currentPage.selection["0"].x
   const textY = figma.currentPage.selection["0"].y + figma.currentPage.selection["0"].height
   const textParent = figma.currentPage.selection["0"].parent
+  const textFills = figma.currentPage.selection["0"].fills
+  const textFontName = figma.currentPage.selection["0"].fontName
+  const textFontSize = figma.currentPage.selection["0"].fontSize
 
   if (msg.type === "create-mexican-waves") {
-    figma.loadFontAsync({ family: "Roboto", style: "Regular" }).then(() => {
-      // Init an Array of nodes texts
-      const nodes: SceneNode[] = []
+    figma
+      .loadFontAsync({ family: "Roboto", style: "Regular" })
+      .then(() => {
+        // Init an Array of nodes texts
+        const nodes: SceneNode[] = []
 
-      // Create the Mexican Wave
-      const mw = mexicanWave(text)
+        // Create the Mexican Wave
+        const mw = mexicanWave(text)
 
-      // Display the MW
-      mw.forEach((element, i) => {
-        const eachWave = figma.createText()
-        eachWave.characters = element
-        eachWave.y = i * 25
+        // Display the MW
+        mw.forEach((element, i) => {
+          const eachWave = figma.createText()
+          eachWave.characters = element
+          eachWave.y = i * 25
 
-        // Create array of texts
-        nodes.push(eachWave)
+          // Create array of texts
+          nodes.push(eachWave)
+        })
+
+        // Create a group
+        const groupMW = figma.group(nodes, textParent)
+        groupMW.name = "Mexican Wave"
+        groupMW.x = textX
+        groupMW.y = textY + 10
+
+        // Select and zoom to the result
+        figma.currentPage.selection = figma.currentPage.findAll(function(e): any {
+          return e.name === "Mexican Wave"
+        })
+        figma.viewport.scrollAndZoomIntoView(nodes)
       })
-
-      // Create a group
-      const groupMW = figma.group(nodes, textParent)
-      groupMW.name = "Mexican Wave"
-      groupMW.x = textX
-      groupMW.y = textY + 10
-
-      // Select and zoom to the result
-      figma.currentPage.selection = figma.currentPage.findAll(function(e): any {
-        return e.name === "Mexican Wave"
-      })
-      figma.viewport.scrollAndZoomIntoView(nodes)
-    })
+      .catch(err => console.warn(err))
   } else if (msg.type === "create-hashtag") {
-    figma.loadFontAsync({ family: "Roboto", style: "Regular" }).then(() => {
-      const hashtag = generateHashtag(text)
-      const insertHashtag = figma.createText()
-      insertHashtag.characters = hashtag
-      insertHashtag.x = textX
-      insertHashtag.y = textY + 10
-      const nodes: SceneNode[] = [insertHashtag]
+    figma
+      .loadFontAsync({ family: "Roboto", style: "Regular" })
+      .then(() => {
+        const hashtag = generateHashtag(text)
+        const insertHashtag = figma.createText()
+        insertHashtag.characters = hashtag
+        insertHashtag.x = textX
+        insertHashtag.y = textY + 10
+        insertHashtag.fills = textFills
 
-      textParent.appendChild(insertHashtag)
-      figma.viewport.scrollAndZoomIntoView(nodes)
-    })
+        figma
+          .loadFontAsync({ ...textFontName })
+          .then(() => {
+            insertHashtag.fontName = textFontName
+          })
+          .catch(error => console.error(error))
+
+        insertHashtag.fontSize = textFontSize
+
+        const nodes: SceneNode[] = [insertHashtag]
+
+        textParent.appendChild(insertHashtag)
+        figma.viewport.scrollAndZoomIntoView(nodes)
+      })
+      .catch(err => console.warn(err))
   } else {
     figma.closePlugin()
   }

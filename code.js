@@ -26,12 +26,18 @@ const generateHashtag = str => str.length > 140 || str === ""
 //Capitalize each word
 const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
 const utilsText = msg => {
+    console.log(figma.currentPage.selection["0"]);
     const text = figma.currentPage.selection["0"].characters;
     const textX = figma.currentPage.selection["0"].x;
     const textY = figma.currentPage.selection["0"].y + figma.currentPage.selection["0"].height;
     const textParent = figma.currentPage.selection["0"].parent;
+    const textFills = figma.currentPage.selection["0"].fills;
+    const textFontName = figma.currentPage.selection["0"].fontName;
+    const textFontSize = figma.currentPage.selection["0"].fontSize;
     if (msg.type === "create-mexican-waves") {
-        figma.loadFontAsync({ family: "Roboto", style: "Regular" }).then(() => {
+        figma
+            .loadFontAsync({ family: "Roboto", style: "Regular" })
+            .then(() => {
             // Init an Array of nodes texts
             const nodes = [];
             // Create the Mexican Wave
@@ -54,19 +60,31 @@ const utilsText = msg => {
                 return e.name === "Mexican Wave";
             });
             figma.viewport.scrollAndZoomIntoView(nodes);
-        });
+        })
+            .catch(err => console.warn(err));
     }
     else if (msg.type === "create-hashtag") {
-        figma.loadFontAsync({ family: "Roboto", style: "Regular" }).then(() => {
+        figma
+            .loadFontAsync({ family: "Roboto", style: "Regular" })
+            .then(() => {
             const hashtag = generateHashtag(text);
             const insertHashtag = figma.createText();
             insertHashtag.characters = hashtag;
             insertHashtag.x = textX;
             insertHashtag.y = textY + 10;
+            insertHashtag.fills = textFills;
+            figma
+                .loadFontAsync(Object.assign({}, textFontName))
+                .then(() => {
+                insertHashtag.fontName = textFontName;
+            })
+                .catch(error => console.error(error));
+            insertHashtag.fontSize = textFontSize;
             const nodes = [insertHashtag];
             textParent.appendChild(insertHashtag);
             figma.viewport.scrollAndZoomIntoView(nodes);
-        });
+        })
+            .catch(err => console.warn(err));
     }
     else {
         figma.closePlugin();
