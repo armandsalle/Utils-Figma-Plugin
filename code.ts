@@ -100,6 +100,7 @@ const utilsText = msg => {
         const nodes: SceneNode[] = [insertHashtag]
 
         textParent.appendChild(insertHashtag)
+        figma.currentPage.selection = nodes
         figma.viewport.scrollAndZoomIntoView(nodes)
       })
       .catch(err => console.warn(err))

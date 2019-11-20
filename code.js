@@ -82,6 +82,7 @@ const utilsText = msg => {
             insertHashtag.fontSize = textFontSize;
             const nodes = [insertHashtag];
             textParent.appendChild(insertHashtag);
+            figma.currentPage.selection = nodes;
             figma.viewport.scrollAndZoomIntoView(nodes);
         })
             .catch(err => console.warn(err));
