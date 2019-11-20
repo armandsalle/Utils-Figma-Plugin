@@ -80,6 +80,7 @@ figma.ui.onmessage = msg => {
             utilsText(msg);
         }
         else {
+            // Create the error message
             figma.ui.postMessage("NOT_TEXT");
         }
     });

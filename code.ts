@@ -93,6 +93,7 @@ figma.ui.onmessage = msg => {
     if (e.type === "TEXT") {
       utilsText(msg)
     } else {
+      // Create the error message
       figma.ui.postMessage("NOT_TEXT")
     }
   })
