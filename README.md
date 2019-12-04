@@ -6,7 +6,7 @@ The plugin can:
 - Generate a mexican wave based on a word or a sentence
 
 This plugin was created to learn myself TypeScript. It can be, and it will be maintain to add new features on it.
-I'm a french junior dev so sorry for my bad english, I hope you understand my comments !
+I'm a french junior dev so sorry for my bad english, I hope you'll understand my comments !
 
 ## Installation
 

@@ -2,19 +2,7 @@ import { mexicanWave } from "./mexicanWave"
 import { generateHashtag } from "./generateHashtag"
 
 // Variables about the selected text
-let newFont
-const text = figma.currentPage.selection["0"].characters
-const textX = figma.currentPage.selection["0"].x
-const textY = figma.currentPage.selection["0"].y + figma.currentPage.selection["0"].height
-const textHeight = figma.currentPage.selection["0"].height
-const textParent = figma.currentPage.selection["0"].parent
-const textFills = figma.currentPage.selection["0"].fills
-const textFontName = figma.currentPage.selection["0"].fontName
-const textFontSize = figma.currentPage.selection["0"].fontSize
-const textOpacity = figma.currentPage.selection["0"].opacity
-const textRotation = figma.currentPage.selection["0"].rotation
-
-console.log(figma.currentPage.selection["0"])
+let newFont, text, textX, textY, textHeight, textParent, textFills, textFontName, textFontSize, textOpacity, textRotation
 
 const createMexicanWave = () => {
   // Init an Array of nodes texts
@@ -68,6 +56,7 @@ const createHashtag = () => {
   insertHashtag.fontName = newFont
   insertHashtag.opacity = textOpacity
   insertHashtag.rotation = textRotation
+  nodes.push(insertHashtag)
 
   // Select and zoom to the result
   textParent.appendChild(insertHashtag)
@@ -77,7 +66,17 @@ const createHashtag = () => {
 
 // Main Function
 export const utilsText = msg => {
-  // Create all variables base on the current text selected
+  text = figma.currentPage.selection["0"].characters
+  textX = figma.currentPage.selection["0"].x
+  textY = figma.currentPage.selection["0"].y + figma.currentPage.selection["0"].height
+  textHeight = figma.currentPage.selection["0"].height
+  textParent = figma.currentPage.selection["0"].parent
+  textFills = figma.currentPage.selection["0"].fills
+  textFontName = figma.currentPage.selection["0"].fontName
+  textFontSize = figma.currentPage.selection["0"].fontSize
+  textOpacity = figma.currentPage.selection["0"].opacity
+  textRotation = figma.currentPage.selection["0"].rotation
+
   figma
     .loadFontAsync({ ...textFontName })
     .then(() => {
