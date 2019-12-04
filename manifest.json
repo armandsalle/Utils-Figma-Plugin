@@ -2,6 +2,6 @@
   "name": "Utils Functions",
   "id": "778910419377816946",
   "api": "1.0.0",
-  "main": "code.js",
-  "ui": "ui.html"
+  "main": "dist/code.js",
+  "ui": "dist/ui.html"
 }

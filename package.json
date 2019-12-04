@@ -1,0 +1,37 @@
+{
+  "name": "utils-figma-plugin",
+  "version": "1.0.0",
+  "description": "Plugin Figma with utils functions like create hashtag and create a mexican wave",
+  "main": "code.js",
+  "scripts": {
+    "dev": "npx webpack --mode=development --watch",
+    "build": "npx webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/armandsalle/Utils-Figma-Plugin.git"
+  },
+  "keywords": [
+    "plugin",
+    "figma",
+    "utils",
+    "functions"
+  ],
+  "author": "Armand Sallé",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/armandsalle/Utils-Figma-Plugin/issues"
+  },
+  "homepage": "https://github.com/armandsalle/Utils-Figma-Plugin#readme",
+  "devDependencies": {
+    "css-loader": "^3.2.1",
+    "html-webpack-inline-source-plugin": "0.0.10",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^1.0.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.3",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}

@@ -1,0 +1,135 @@
+:root {
+  --color-black: #1c1c1c;
+  --color-white: #eeebec;
+  --color-red: #f14407;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+
+body {
+  font-family: "Kanit", sans-serif;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  height: 380px;
+  position: relative;
+}
+
+h1 {
+  font-size: 36px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.8;
+  text-transform: uppercase;
+  margin-right: 20px;
+  line-height: 1;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+p {
+  font-size: 12px;
+  opacity: 0.3;
+  line-height: 13px;
+}
+
+a {
+  color: var(--color-white);
+}
+
+.container {
+  padding: 10px 20px;
+  position: relative;
+  height: 100%;
+}
+
+.wrapper {
+  margin-top: 50px;
+  width: 100%;
+}
+
+.title_wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.line {
+  height: 1px;
+  background-color: var(--color-white);
+  opacity: 0.5;
+  flex-grow: 1;
+  margin-bottom: 4px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.item-text {
+  max-width: 170px;
+}
+
+.btn {
+  padding: 6px 33px;
+  border: none;
+  outline: 0;
+  box-shadow: none;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-weight: 900;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.footer {
+  color: var(--color-white);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  opacity: 0.5;
+  padding-bottom: 6px;
+}
+
+.error {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 80vw;
+  height: 80vh;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  background-color: var(--color-red);
+  color: var(--color-white);
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  font-weight: 900;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.span-error {
+  color: var(--color-black);
+  padding-left: 5px;
+  font-weight: 600;
+}
