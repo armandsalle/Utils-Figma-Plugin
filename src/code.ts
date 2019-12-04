@@ -1,4 +1,4 @@
-import { utilsText } from "./functions"
+import { utilsText } from "./utilsText"
 
 // Init UI pop up
 figma.showUI(__html__)

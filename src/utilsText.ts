@@ -1,6 +1,7 @@
 import { mexicanWave } from "./mexicanWave"
 import { generateHashtag } from "./generateHashtag"
 
+// Variables about the selected text
 let newFont
 const text = figma.currentPage.selection["0"].characters
 const textX = figma.currentPage.selection["0"].x
@@ -21,8 +22,9 @@ const createMexicanWave = () => {
 
   // Create the Mexican Wave
   const mw = mexicanWave(text)
+
+  // Display the MW
   mw.forEach((element, i) => {
-    // Display the MW
     const eachWave = figma.createText()
     eachWave.characters = element
     eachWave.y = textHeight * i
@@ -56,9 +58,9 @@ const createHashtag = () => {
   // Create the hashtag
   const hashtag = generateHashtag(text)
   const insertHashtag = figma.createText()
-  insertHashtag.characters = hashtag
 
   // Display the hashtag with the same style as the selected text
+  insertHashtag.characters = hashtag
   insertHashtag.x = textX
   insertHashtag.y = textY + 10
   insertHashtag.fills = textFills
