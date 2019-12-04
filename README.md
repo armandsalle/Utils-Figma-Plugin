@@ -1,7 +1,11 @@
 # Plugin Utils Functions for Figma
 
-This plugin was created to learn myself TypeScript. It can be, and it will be maintain to add new features on it.
+The plugin can:
 
+- Create a hashtag based on a word or a sentence
+- Generate a mexican wave based on a word or a sentence
+
+This plugin was created to learn myself TypeScript. It can be, and it will be maintain to add new features on it.
 I'm a french junior dev so sorry for my bad english, I hope you understand my comments !
 
 ## Installation
