@@ -7,13 +7,18 @@ figma.ui.resize(500, 400)
 
 // When a user click a button on the UI
 figma.ui.onmessage = msg => {
-  // Get the text selected
-  figma.currentPage.selection.forEach(e => {
-    if (e.type === "TEXT") {
-      utilsText(msg)
-    } else {
-      // Create the error message
-      figma.ui.postMessage("NOT_TEXT")
-    }
-  })
+  if (figma.currentPage.selection.length) {
+    // Get the text selected
+    figma.currentPage.selection.forEach(e => {
+      if (e.type === "TEXT") {
+        utilsText(msg)
+      } else {
+        //figma.ui.postMessage("NOT_TEXT")
+        figma.ui.postMessage({ type: "error", data: "NOT_TEXT" })
+      }
+    })
+  } else {
+    //Send message if no selection
+    figma.ui.postMessage({ type: "error", data: "NOT_SELECTION" })
+  }
 }
