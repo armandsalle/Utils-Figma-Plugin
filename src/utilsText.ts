@@ -1,99 +1,71 @@
-import { mexicanWave } from "./mexicanWave"
-import { generateHashtag } from "./generateHashtag"
+import { generateMexicanWave, generateHashtag } from "./textFunctions"
 
-// Variables about the selected text
-let newFont, text, textX, textY, textHeight, textParent, textFills, textFontName, textFontSize, textOpacity, textRotation
+function createMexicanWave() {
+  const node = figma.currentPage.selection["0"]
+  const newNodes: SceneNode[] = []
 
-const createMexicanWave = () => {
-  // Init an Array of nodes texts
-  const nodes: SceneNode[] = []
+  const mw = generateMexicanWave(node.characters)
 
-  // Create the Mexican Wave
-  const mw = mexicanWave(text)
-
-  // Display the MW
   mw.forEach((element, i) => {
-    const eachWave = figma.createText()
-    eachWave.characters = element
-    eachWave.y = textHeight * i
-    eachWave.fills = textFills
-    eachWave.fontSize = textFontSize
-    eachWave.fontName = newFont
-    eachWave.rotation = textRotation
-    eachWave.opacity = textOpacity
+    const newText = figma.createText()
+    const wave = style(node, newText, element)
 
-    // Create array of texts
-    nodes.push(eachWave)
+    wave.x = node.x
+    wave.y = node.height * i
+    newNodes.push(wave)
   })
 
-  // Create a group
-  const groupMW = figma.group(nodes, textParent)
+  const groupMW = figma.group(newNodes, node.parent)
   groupMW.name = "Mexican Wave"
-  groupMW.x = textX
-  groupMW.y = textY + 10
+  groupMW.x = node.x
+  groupMW.y = node.y + node.height + 10
 
-  // Select and zoom to the result
-  figma.currentPage.selection = figma.currentPage.findAll(function(e): any {
-    return e.name === "Mexican Wave"
-  })
-  figma.viewport.scrollAndZoomIntoView(nodes)
+  figma.currentPage.selection = figma.currentPage.findAll(e => e.name === "Mexican Wave")
+  figma.viewport.center = { x: groupMW.x, y: groupMW.y }
+  figma.viewport.zoom = 0.3
 }
 
-const createHashtag = () => {
-  // Init an Array of nodes texts
-  const nodes: SceneNode[] = []
+function createHashtag() {
+  const node = figma.currentPage.selection["0"]
+  const newNodes: SceneNode[] = []
 
-  // Create the hashtag
-  const hashtag = generateHashtag(text)
-  const insertHashtag = figma.createText()
+  const hashtag = generateHashtag(node.characters)
+  const newText = figma.createText()
+  const newNode = style(node, newText, hashtag)
+  newNode.x = node.x
+  newNode.y = node.y + node.height + 10
+  newNodes.push(newNode)
 
-  // Display the hashtag with the same style as the selected text
-  insertHashtag.characters = hashtag
-  insertHashtag.x = textX
-  insertHashtag.y = textY + 10
-  insertHashtag.fills = textFills
-  insertHashtag.fontSize = textFontSize
-  insertHashtag.fontName = newFont
-  insertHashtag.opacity = textOpacity
-  insertHashtag.rotation = textRotation
-  nodes.push(insertHashtag)
-
-  // Select and zoom to the result
-  textParent.appendChild(insertHashtag)
-  figma.currentPage.selection = nodes
-  figma.viewport.scrollAndZoomIntoView(nodes)
+  node.parent.appendChild(newNode)
+  figma.currentPage.selection = newNodes
+  figma.viewport.center = { x: newNode.x, y: newNode.y }
+  figma.viewport.zoom = 0.3
 }
 
-// Main Function
-export const utilsText = msg => {
-  text = figma.currentPage.selection["0"].characters
-  textX = figma.currentPage.selection["0"].x
-  textY = figma.currentPage.selection["0"].y + figma.currentPage.selection["0"].height
-  textHeight = figma.currentPage.selection["0"].height
-  textParent = figma.currentPage.selection["0"].parent
-  textFills = figma.currentPage.selection["0"].fills
-  textFontName = figma.currentPage.selection["0"].fontName
-  textFontSize = figma.currentPage.selection["0"].fontSize
-  textOpacity = figma.currentPage.selection["0"].opacity
-  textRotation = figma.currentPage.selection["0"].rotation
+function style(oldEl, newEl, text) {
+  const result = newEl
 
   figma
-    .loadFontAsync({ ...textFontName })
+    .loadFontAsync(oldEl.fontName)
     .then(() => {
-      newFont = textFontName
+      oldEl.textStyleId ? (result.textStyleId = oldEl.textStyleId) : ""
+      oldEl.fillStyleId ? (result.fillStyleId = oldEl.fillStyleId) : ""
+      oldEl.effectStyleId ? (result.effectStyleId = oldEl.effectStyleId) : ""
+      oldEl.strokeStyleId ? (result.strokeStyleId = oldEl.strokeStyleId) : ""
+      result.fontName = oldEl.fontName
+      result.characters = text
     })
     .catch(error => console.error(error))
 
-  figma
-    .loadFontAsync({ family: "Roboto", style: "Regular" })
-    .then(() => {
-      if (msg.type === "create-mexican-waves") {
-        createMexicanWave()
-      } else if (msg.type === "create-hashtag") {
-        createHashtag()
-      } else {
-        figma.closePlugin()
-      }
-    })
-    .catch(err => console.warn(err))
+  return result
+}
+
+export const utilsText = msg => {
+  if (msg.type === "create-mexican-waves") {
+    createMexicanWave()
+  } else if (msg.type === "create-hashtag") {
+    createHashtag()
+  } else {
+    figma.closePlugin()
+  }
 }
