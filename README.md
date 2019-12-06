@@ -25,7 +25,3 @@ Then:
 - [x] Improve the UI
 - [x] Create reusable Web Component for the UI
 - [x] Refactor code
-
-Thank's and good bye,
-
-Armand !
