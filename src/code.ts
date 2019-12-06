@@ -5,7 +5,10 @@ figma.showUI(__html__)
 figma.ui.show()
 figma.ui.resize(500, 400)
 
-// When a user click a button on the UI
+/**
+ * Get the user click on a button in the UI
+ * @param {Object} msg
+ */
 figma.ui.onmessage = msg => {
   if (figma.currentPage.selection.length === 1) {
     if (figma.currentPage.selection[0].type === "TEXT") {
