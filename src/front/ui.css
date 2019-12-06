@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Kanit:400,500,700,800,900&display=swap");
+
 :root {
   --color-black: #1c1c1c;
   --color-white: #eeebec;
@@ -54,6 +55,15 @@ a {
   padding: 10px 20px;
   position: relative;
   height: 100%;
+}
+
+.emoji {
+  opacity: 1;
+  font-size: 14px;
+}
+
+.emoji span {
+  opacity: 0.8;
 }
 
 .wrapper {

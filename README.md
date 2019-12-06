@@ -5,8 +5,9 @@ The plugin can:
 - Create a hashtag based on a word or a sentence
 - Generate a mexican wave based on a word or a sentence
 
-This plugin was created to learn myself TypeScript. It can be, and it will be maintain to add new features on it.
-I'm a french junior dev so sorry for my bad english, I hope you'll understand my comments !
+This is my first plugin and my first TypeScript project. You can add features on it if you want.
+
+![Plugin demo](demo/demo.gif)
 
 ## Installation
 
@@ -20,9 +21,10 @@ Then:
 
 ## Next Features
 
-- [ ] Improve the UI
-- [ ] Create reusable Web Component for the UI
-- [ ] Refactor code
+- [ ] Add more features
+- [x] Improve the UI
+- [x] Create reusable Web Component for the UI
+- [x] Refactor code
 
 Thank's and good bye,
 
