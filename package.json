@@ -1,7 +1,7 @@
 {
-  "name": "utils-figma-plugin",
+  "name": "useful-figma-plugin",
   "version": "1.0.0",
-  "description": "Plugin Figma with utils functions like create hashtag and create a mexican wave",
+  "description": "Plugin Figma with useful functions like create hashtag and create a mexican wave",
   "main": "code.js",
   "scripts": {
     "dev": "npx webpack --mode=development --watch",
@@ -14,7 +14,7 @@
   "keywords": [
     "plugin",
     "figma",
-    "utils",
+    "useful",
     "functions"
   ],
   "author": "Armand Sallé",

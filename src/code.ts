@@ -17,7 +17,7 @@ figma.ui.onmessage = msg => {
       figma.ui.postMessage({ type: "error", data: "NOT_TEXT" })
     }
   } else if (figma.currentPage.selection.length === 0) {
-    figma.ui.postMessage({ type: "error", data: "NOT_SELECTION" })
+    figma.ui.postMessage({ type: "error", data: "NO_SELECTION" })
   } else if (figma.currentPage.selection.length > 1) {
     figma.ui.postMessage({ type: "error", data: "NO_MULTIPLE_SELECTION" })
   }

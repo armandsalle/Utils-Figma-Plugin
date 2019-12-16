@@ -1,6 +1,6 @@
 <template>
   <main class="container">
-    <h1>Utils functions</h1>
+    <h1>Useful functions</h1>
     <p class="emoji">
       🙌
       <span>Select a text and then click one of this two buttons</span>

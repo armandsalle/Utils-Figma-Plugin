@@ -1,4 +1,4 @@
-# Plugin Utils Functions for Figma
+# Plugin Useful Functions for Figma
 
 The plugin can:
 
