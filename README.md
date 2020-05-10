@@ -22,6 +22,5 @@ Then:
 ## Next Features
 
 - [ ] Add more features
-- [x] Improve the UI
-- [x] Create reusable Web Component for the UI
-- [x] Refactor code
+- [ ] Improve the UI
+- [ ] Refactor code
